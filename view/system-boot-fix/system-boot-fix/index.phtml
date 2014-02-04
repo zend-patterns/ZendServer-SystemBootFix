@@ -1,3 +1,7 @@
+<div class="toast alert static" style="margin: 12px">
+You can seriously damage your system with this module! be careful!
+</div>
+
 <?php if ($snapshotProfile === null): ?>
 <div>
 	<h2>Current System Boot Snapshot</h2>
@@ -9,6 +13,7 @@
 </div>
 <div>
 	<h2>Things to do</h2>
+	<div class="toast alert static" style="margin: 12px">These actions delete and change settings in your system</div>
 	<form action="<?php echo $this->basepath('SystemBootFix/Replace') ?>" method="POST">
 		<p>Remove the current snapshot if it exists and create a new one from the current configuration</p>
 		<button>Replace the current System Boot Snapshot</button>
@@ -25,6 +30,7 @@
 </div>
 <div>
 	<h2>Things to do</h2>
+	<div class="toast alert static" style="margin: 12px">These actions delete and change settings in your system</div>
 	<form action="<?php echo $this->basepath('SystemBootFix/Patch') ?>" method="POST">
 		<p>Override the current configuration snapshot with the profile from the existing system profile</p>
 		<button>Override current System Boot Snapshot</button>
