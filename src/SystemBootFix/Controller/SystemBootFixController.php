@@ -18,18 +18,19 @@ class SystemBootFixController extends AbstractActionController
 {
     public function indexAction() {
     	
-    	$filePath = $filePath = FS::getGuiTempDir() . DIRECTORY_SEPARATOR . 'systemBoot.zip';
-    	$archive = $this->getSystemBootArchive($filePath);
-    	
-    	if ($archive->locateName(WebAPIController::METADATA_FILE) !== false) {
-	    	$snapshotProfile = $archive->getFromName(WebAPIController::METADATA_FILE);
-    	} else {
+    	try {
+	    	$filePath = $filePath = FS::getGuiTempDir() . DIRECTORY_SEPARATOR . 'systemBoot.zip';
+	    	$archive = $this->getSystemBootArchive($filePath);
+	    	if ($archive->locateName(WebAPIController::METADATA_FILE) !== false) {
+		    	$snapshotProfile = $archive->getFromName(WebAPIController::METADATA_FILE);
+	    	} else {
+	    		$snapshotProfile = null;
+	    	}
+	    	$archive->close();
+	    	unlink($filePath);
+    	} catch (\Exception $ex) {
     		$snapshotProfile = null;
     	}
-    	
-    	$archive->close();
-    	
-    	unlink($filePath);
     	
     	$currentProfile = $this->getCurrentProfile();
     	
@@ -37,6 +38,21 @@ class SystemBootFixController extends AbstractActionController
         	'snapshotProfile' => $snapshotProfile,
         	'currentProfile' => $currentProfile,
         );
+    }
+    
+    public function replaceAction() {
+    	$snapshotsMapper = $this->getServiceLocator()->get('Snapshots\Db\Mapper');
+    	
+    	$systemBoot = $snapshotsMapper->findSystemSnapshot();
+    	if ($systemBoot->getId()) {
+	    	$snapshotsMapper->deleteKeysById(array($systemBoot->getId()));
+    	}
+    	$tasks = $this->getServiceLocator()->get('Configuration\Task\ConfigurationPackage');
+    	$taskid = $tasks->exportConfiguration(Mapper::SNAPSHOT_SYSTEM_BOOT);
+    	$tasksMapper = $this->getServiceLocator()->get('Zsd\Db\TasksMapper');
+    	$tasksMapper->waitForTasksComplete(array(), array($taskid));
+    	
+    	return $this->redirect()->toRoute('default',array('controller' => 'SystemBootFix', 'action' => 'index'));
     }
     
     public function patchAction() {

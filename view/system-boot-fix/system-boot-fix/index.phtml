@@ -13,9 +13,14 @@
 	<p><?php echo implode(',', $currentProfile) ?></p>
 </div>
 <div>
-	<h2>Override current System Boot Snapshot profile?</h2>
+	<h2>Things to do</h2>
 	<form action="<?php echo $this->basepath('SystemBootFix/Patch') ?>" method="POST">
-		<button>Yes, please!</button>
+		<p>Override the current configuration snapshot with the profile from the existing system profile</p>
+		<button>Override current System Boot Snapshot</button>
+	</form>
+	<form action="<?php echo $this->basepath('SystemBootFix/Replace') ?>" method="POST">
+		<p>Remove the current snapshot if it exists and create a new one from the current configuration</p>
+		<button>Replace the current System Boot Snapshot</button>
 	</form>
 </div>
 <?php endif ?>
