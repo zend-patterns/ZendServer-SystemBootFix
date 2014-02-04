@@ -17,5 +17,10 @@ class SystemBootFixController extends AbstractActionController
     {
         return array();
     }
+    
+    public function patchAction()
+    {
+    	return $this->redirect()->toRoute('default',array('controller' => 'SystemBootFix', 'action' => 'index'));
+    }
 
 }
