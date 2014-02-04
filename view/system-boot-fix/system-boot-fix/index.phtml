@@ -3,6 +3,17 @@
 	<h2>Current System Boot Snapshot</h2>
 	<p>No metadata file found in System Boot</p>
 </div>
+<div>
+	<h2>Current System Profile</h2>
+	<p><?php echo implode(',', $currentProfile) ?></p>
+</div>
+<div>
+	<h2>Things to do</h2>
+	<form action="<?php echo $this->basepath('SystemBootFix/Replace') ?>" method="POST">
+		<p>Remove the current snapshot if it exists and create a new one from the current configuration</p>
+		<button>Replace the current System Boot Snapshot</button>
+	</form>
+</div>
 <?php else: ?>
 <div>
 	<h2>Current System Boot Snapshot</h2>
