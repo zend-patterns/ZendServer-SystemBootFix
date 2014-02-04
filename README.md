@@ -27,6 +27,6 @@ Warning again: You can seriously damage your system with this module! be careful
 Installation
 ------------
 
-Deploy this module's files in <zend>/gui/3rdparty/SystemBootFix
-Add 'SystemBootFix' to <zend>/gui/3rdparty/modules.config.php
-Refresh UI, go to Administration | System Boot
+- Deploy this module's files in <zend>/gui/3rdparty/SystemBootFix
+- Add 'SystemBootFix' to <zend>/gui/3rdparty/modules.config.php
+- Refresh UI, go to Administration | System Boot
