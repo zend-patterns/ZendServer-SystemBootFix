@@ -17,5 +17,11 @@ The Patch action allows you to rewrite the "metadata" file in the System boot sn
 
 The Replace action allows you to completely replace the System Boot snapshot in case you want to or it's missing. Note that the new snapshot will be according to the current configuration at the time of creation.
 
+Warning again: You can seriously damage your system with this module! be careful!
+
 Installation
 ------------
+
+Deploy this module's files in <zend>/gui/3rdparty/SystemBootFix
+Add 'SystemBootFix' to <zend>/gui/3rdparty/modules.config.php
+Refresh UI, go to Administration | System Boot
