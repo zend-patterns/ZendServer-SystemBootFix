@@ -10,13 +10,11 @@
 namespace SystemBootFix;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 
-class Module implements AutoloaderProviderInterface
+class Module implements AutoloaderProviderInterface, BootstrapListenerInterface
 {
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -26,9 +24,23 @@ class Module implements AutoloaderProviderInterface
         );
     }
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
+    
+	/* (non-PHPdoc)
+	 * @see \Zend\ModuleManager\Feature\BootstrapListenerInterface::onBootstrap()
+	 */
+	public function onBootstrap(\Zend\EventManager\EventInterface $e) {
+		/// add ACL entries
+		$serviceManager = $e->getApplication()->getServiceManager();
+		$identityAcl = $serviceManager->get('ZendServerIdentityAcl');
+		$identityAcl->addResource('route:SystemBootFix');
+		$identityAcl->allow('administrator', 'route:SystemBootFix');
+		$licenseAcl = $serviceManager->get('ZendServerLicenseAcl');
+		$licenseAcl->addResource('route:SystemBootFix');
+		$licenseAcl->allow(null, 'route:SystemBootFix');
+	}
+
 
 }
