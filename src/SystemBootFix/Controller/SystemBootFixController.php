@@ -40,10 +40,15 @@ class SystemBootFixController extends AbstractActionController
     	
     	unlink($filePath);
     	
-    	
+    	$profilesMapper = $this->getServiceLocator()->get('Zsd\Db\NodesProfileMapper');
+    	$currentProfile = $profilesMapper->getProfile();
+    	if(isset($currentProfile['NODE_ID'])) {
+	    	unset($currentProfile['NODE_ID']);
+    	}
     	
         return array(
-        	'profileToImport' => $snapshotProfile
+        	'snapshotProfile' => $snapshotProfile,
+        	'currentProfile' => $currentProfile,
         );
     }
     

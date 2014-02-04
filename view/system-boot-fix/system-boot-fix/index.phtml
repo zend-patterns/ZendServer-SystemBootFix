@@ -1,12 +1,19 @@
+<?php if ($snapshotProfile === null): ?>
 <div>
 	<h2>Current System Boot Snapshot</h2>
-	<p><?php echo $profileToImport ?></p>
+	<p>No metadata file found in System Boot</p>
+</div>
+<?php else: ?>
+<div>
+	<h2>Current System Boot Snapshot</h2>
+	<p><?php echo $snapshotProfile ?></p>
 </div>
 <div>
 	<h2>Current System Profile</h2>
-	<p><?php echo $profileToImport ?></p>
+	<p><?php echo implode(',', $currentProfile) ?></p>
 </div>
 <div>
 	<h2>Override current System Boot Snapshot profile?</h2>
 	<button>Yes, please!</button>
 </div>
+<?php endif ?>
