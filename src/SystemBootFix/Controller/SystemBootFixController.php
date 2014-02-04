@@ -18,10 +18,4 @@ class SystemBootFixController extends AbstractActionController
         return array();
     }
 
-    public function fooAction()
-    {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /systemBootFix/system-boot-fix/foo
-        return array();
-    }
 }
