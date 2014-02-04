@@ -10,4 +10,17 @@ return array(
             'SystemBootFix' => __DIR__ . '/../view',
         ),
     ),
+	'navigation' => array(
+        	'default' => array(
+				'administration' => array(
+					'pages' => array(
+						array(
+							'label' => 'System Boot',
+							'controller' => 'SystemBootFix',
+							'route' => 'default',
+						),
+					)
+				)
+			)
+        )
 );
