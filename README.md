@@ -7,6 +7,9 @@ This is a 3rd party Zend Server only module.
    Warning! The actions supplied by this module are
    dangerous for your system! Use them only with
    proper guidance or if you know what you're doing!
+
+   No warranty is provided, no guarantee it works 
+   This software may damage your system irrevocably!
 ********************************************************
 
 This module adds a new page to Zend Server and adds two new actions (not webapi) that make changes to the onboard system-boot snapshot used for reseting configuration.
@@ -17,7 +20,9 @@ The Patch action allows you to rewrite the "metadata" file in the System boot sn
 
 The Replace action allows you to completely replace the System Boot snapshot in case you want to or it's missing. Note that the new snapshot will be according to the current configuration at the time of creation.
 
+********************************************************
 Warning again: You can seriously damage your system with this module! be careful!
+********************************************************
 
 Installation
 ------------
