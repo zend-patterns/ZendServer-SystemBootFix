@@ -14,6 +14,8 @@
 </div>
 <div>
 	<h2>Override current System Boot Snapshot profile?</h2>
-	<button>Yes, please!</button>
+	<form action="<?php echo $this->basepath('SystemBootFix/Patch') ?>" method="POST">
+		<button>Yes, please!</button>
+	</form>
 </div>
 <?php endif ?>
